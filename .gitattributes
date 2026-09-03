@@ -1,2 +1,32 @@
-# Auto detect text files and perform LF normalization
+# 1. Normalización de saltos de línea
 * text=auto
+
+# Asegurar que archivos de código siempre usen texto
+*.py text
+*.ipynb text
+*.r text
+*.R text
+*.sql text
+*.md text
+*.json text
+*.yaml text
+*.yml text
+
+# 2. Manejo de archivos de datos y binarios
+*.csv text eol=lf
+*.xlsx binary
+*.xls binary
+*.parquet binary
+*.pkl binary
+*.pickle binary
+*.h5 binary
+
+# Archivos de bases de datos locales
+*.db binary
+*.sqlite binary
+
+# 3. Imágenes y gráficos generados
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
