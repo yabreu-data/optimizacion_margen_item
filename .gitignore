@@ -1,1 +1,23 @@
+# Archivos temporales
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
 
+# Entornos virtuales de Python
+venv/
+.venv/
+env/
+.spyproject/
+.spyderproject/
+*.spyder
+
+# Archivos ocultos del sistema Windows
+Thumbs.db
+desktop.ini
+
+# Archivos de configuración local o contraseñas
+.env
