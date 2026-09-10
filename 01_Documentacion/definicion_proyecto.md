@@ -1,40 +1,41 @@
 <div align="center">
-  <img src="https://i.pinimg.com/236x/d0/5c/49/d05c490462edd8f16e9ca52b9c00976a.jpg" width="100" alt="Banner de bienvenida" />
-  
+ 
   📌 Este documento complementa el [README.md](https://github.com/yabreu-data/optimizacion_margen_item/blob/main/README.md) del proyecto.
 </div>
 
 <br>
 
-> [!IMPORTANT]
 > ### 🎯 Objetivo Principal
 > Detallar el contexto de negocio, preguntas, hipótesis y alcance del análisis de optimización de margen de ganancia para **i-tem**.
-
 ---
-### ➖ Índice
-[🏢 Escenario](#-escenario-de-negocio-i-tem) &emsp;|&emsp; [💼 Problema](#-problema-de-negocio) &emsp;|&emsp; [📊 Análisis](#-problema-analítico) &emsp;|&emsp; [👥 Stakeholders](#-stakeholders) &emsp;|&emsp; [🎯 Objetivos](#-objetivos-del-proyecto) &emsp;|&emsp; [❓ Hipótesis](#-hipótesis-iniciales) &emsp;|&emsp; [🧪 Alcance](#-alcance-del-proyecto) &emsp;|&emsp; [✅ Resultados](#-resultados-esperados)
+
+### Índice
+[Escenario](#-escenario-de-negocio-i-tem) &emsp;|&emsp; [Problema](#%EF%B8%8F-el-problema-crítico) &emsp;|&emsp; [Análisis](#-problema-analítico) &emsp;|&emsp; [Stakeholders](#-stakeholders) &emsp;|&emsp; [Objetivos](#-objetivos-del-proyecto) &emsp;|&emsp; [Hipótesis](#-hipótesis-iniciales) &emsp;|&emsp; [Alcance](#-alcance-del-proyecto) &emsp;|&emsp; [Resultados](#-resultados-esperados)
 
 
 
-<br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 ## 🏢 Escenario de Negocio: i-tem
 
-> [!NOTE]
 > **i-tem** es una cadena de retail de electrónicos y accesorios en Chile que opera en un mercado competitivo a través de **4 sucursales estratégicas**: Norte, Sur, Este y Oeste.
 
 <br>
 
 ### ⚠️ El Problema Crítico
-Las sucursales reportan **márgenes de ganancia desiguales** y la dirección carece de visibilidad clara sobre qué productos o regiones son realmente rentables. Esto bloquea decisiones clave como:
 
-* **Promociones:** Saber qué productos priorizar en campañas.
-* **Recursos:** Cómo asignar eficientemente inventario y personal.
-* **Precios:** Cuándo y cómo ajustar costos para maximizar ganancias.
+i-tem opera sin visibilidad clara sobre su rentabilidad real: no sabe cómo se relaciona el `precio_venta` con el `costo_unitario` por producto, cuánto gana cada sucursal en términos netos, ni cómo varía el margen a lo largo del año. Esta falta de visibilidad bloquea decisiones clave de negocio: qué productos priorizar en promociones, cómo asignar inventario y personal entre sucursales, y cuándo ajustar precios o costos para maximizar la utilidad.
+
+> [!WARNING]
+> ### Impacto de NO resolver el problema
+> * **Estrategias ciegas:** Promoción activa de productos con **alto volumen de ventas pero bajo margen de ganancia.**
+> * **Inversión ineficiente:** Distribución incorrecta de recursos de inventario y personal hacia sucursales **poco rentables.**
+> * **Pérdida de ventaja competitiva:** Incapacidad operativa para ajustar precios y compras de forma dinámica para **maximizar la utilidad.**
+
 
 <br>
 
-### 🎯 Solución Analítica Requerida
+### — Solución Analítica Requerida
 El equipo directivo de *i-tem* requiere una solución analítica que permita alcanzar cuatro objetivos clave:
 
 | Pilar | Objetivo Estratégico |
@@ -43,28 +44,6 @@ El equipo directivo de *i-tem* requiere una solución analítica que permita alc
 | 🏬 **Benchmark** | Comparar de forma directa el desempeño financiero entre sucursales. |
 | 📅 **Temporalidad** | Detectar tendencias estacionales que afecten la rentabilidad a lo largo del año. |
 | 🚀 **Acción** | Proponer estrategias concretas para optimizar inventario y ventas. |
-
-
----
-<br>
-
-## 💼 Problema de Negocio
-
-> [!CAUTION]
-> ### 📉 Desafío Principal
-> La cadena **i-tem** opera sin visibilidad clara sobre sus métricas clave de rentabilidad, lo que genera incertidumbre en tres puntos críticos:
-> 1. **Margen por producto:** Desconexión entre el `precio_venta` y su `costo_unitario`.
-> 2. **Rentabilidad regional:** Sucursales operando sin conocer su ganancia neta exacta (`ventas - costos`).
-> 3. **Estacionalidad:** Falta de mapeo del comportamiento de los márgenes a lo largo del año (ej: Diciembre vs. Enero).
-
-<br>
-
-> [!WARNING]
-> ### 🎯 Impacto de No Resolver el Problema
-> * **Estrategias ciegas:** Promoción activa de productos con **alto volumen de ventas pero bajo margen de ganancia.**
-> * **Inversión ineficiente:** Distribución incorrecta de recursos de inventario y personal hacia sucursales **poco rentables.**
-> * **Pérdida de ventaja competitiva:** Incapacidad operativa para ajustar precios y compras de forma dinámica para **maximizar la utilidad.**
-
 ---
 
 <br>
@@ -76,26 +55,24 @@ El core de este proyecto consiste en auditar el ecosistema de datos de **ventas,
 A continuación, puedes desplegar los ejes analíticos que estructuran las consultas y scripts:
 
 <details>
-<summary>📂 <b>Haz clic aquí para ver las 5 Preguntas Clave del Análisis</b></summary>
+<summary>📂 <b>Haz clic aquí para ver las Preguntas Clave del análisis</b></summary>
 
 ### 1. Rentabilidad por Producto
-* ¿Cuáles son los **5 productos** líderes en margen unitario (`precio_venta - costo_unitario`)?
-* ¿Qué artículos muestran un alto volumen transaccional pero un retorno marginal?
+* ¿Cuáles son los 5 productos líderes en margen unitario (precio_venta - costo_unitario)?
+* ¿Qué artículos muestran alto volumen transaccional pero retorno marginal bajo?
+* ¿Qué productos tienen costos de adquisición desproporcionados frente a su precio público?
 
 ### 2. Desempeño por Sucursal
 * ¿Qué sede genera la mayor ganancia neta estructural?
-* ¿Cuál sucursal arrastra el peor ratio de `costos/ventas` (fuga de eficiencia operativa)?
+* ¿Cuál sucursal arrastra el peor ratio costos/ventas (fuga de eficiencia operativa)?
+* ¿Qué sucursal lidera el margen promedio por transacción individual?
 
 ### 3. Tendencias Estacionales
 * ¿Qué meses concentran los picos reales de margen de ganancia?
 * ¿Cómo fluctúa el margen promedio de los productos estrella según la época del año?
 
-### 4. Eficiencia de Operaciones
-* ¿Qué sucursal lidera el margen promedio por transacción individual?
-* ¿Qué productos tienen costos de adquisición desproporcionados frente a su precio público?
-
-### 5. Recomendaciones de Acción
-* ¿Qué **3 productos** específicos deben priorizarse en pauta comercial para acelerar ganancias?
+### 4. Síntesis y Recomendaciones (se responde al final, con base en los hallazgos de 1-3)
+* ¿Qué 3 productos específicos deben priorizarse en pauta comercial?
 * ¿Qué sucursal necesita una reestructuración urgente de costos o precios?
 
 </details>
@@ -108,9 +85,9 @@ A continuación, puedes desplegar los ejes analíticos que estructuran las consu
 
 | Rol | Necesidad Primaria | Uso de los Resultados |
 | :--- | :--- | :--- |
-| 🏬 **Gerentes de Sucursal** | Saber qué productos priorizar en su sucursal para maximizar ganancias. | Uso del dashboard para identificar/aislar los productos de mayor margen en su región. |
-| 📦 **Equipo de Compras** | Optimización de inventario basada en rendimiento económico, no solo en demanda. | Ajustar órdenes de compra priorizando alta rotación combinada con alto margen. |
-| 📈 **Dirección General** | Contención de costos y escalabilidad del beneficio neto global. | Decisiones estratégicas de gobernanza (redistribución, ajustes de precios o auditoría de sedes). |
+| - **Gerentes de Sucursal** | Saber qué productos priorizar en su sucursal para maximizar ganancias. | Uso del dashboard para identificar/aislar los productos de mayor margen en su región. |
+| - **Equipo de Compras** | Optimización de inventario basada en rendimiento económico, no solo en demanda. | Ajustar órdenes de compra priorizando alta rotación combinada con alto margen. |
+| - **Dirección General** | Contención de costos y escalabilidad del beneficio neto global. | Decisiones estratégicas de gobernanza (redistribución, ajustes de precios o auditoría de sedes). |
 
 ---
 
@@ -118,15 +95,15 @@ A continuación, puedes desplegar los ejes analíticos que estructuran las consu
 
 ## 🎯 Objetivos del Proyecto
 
-### 📌 Objetivo General
+### Objetivo General
 Desarrollar una **solución integral de análisis de datos** que le permita a **i-tem** descubrir, aislar y explotar oportunidades financieras para maximizar el margen de ganancia mediante la auditoría de productos, rendimiento por sucursal y estacionalidad de costos.
 
-### 📌 Objetivos Específicos
-* 🔢 **Calcular y rankear** el margen real por producto mediante la relación de costos y precios.
-* 🏬 **Modelar el benchmark** financiero para contrastar la ganancia neta entre todas las sucursales.
-* 📅 **Identificar patrones estacionales** mapeando las curvas de ingresos y costos por mes.
-* ⚠️ **Detectar ineficiencias de volumen** aislando productos populares pero poco rentables.
-* 🚀 **Formular 3 estrategias de negocio accionables** respaldadas directamente por los datos resultantes.
+### Objetivos Específicos
+* **Calcular y rankear** el margen real por producto mediante la relación de costos y precios.
+* **Modelar el benchmark** financiero para contrastar la ganancia neta entre todas las sucursales.
+* **Identificar patrones estacionales** mapeando las curvas de ingresos y costos por mes.
+* **Detectar ineficiencias de volumen** aislando productos populares pero poco rentables.
+* **Formular 3 estrategias de negocio accionables** respaldadas directamente por los datos resultantes.
 
 ---
 
@@ -184,6 +161,28 @@ A través de las consultas en SQL y scripts de Python se validará o refutará e
 
 <br>
 
+## ✍🏻 Metodología
+
+```mermaid
+flowchart TD
+    A[❓ Preguntas de Negocio] --> B[🔍 SQL: Exploración y Calidad]
+    B --> C[📊 SQL: Métricas de Margen]
+    C --> D[📈 Python: EDA y Visualización]
+    D --> E[🖥️ Power BI: Dashboard Interactivo]
+    E --> F[📝 Reporte: Hallazgos y Recomendaciones]
+
+    style A fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0369A1
+    style B fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#B45309
+    style C fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#B45309
+    style D fill:#F3E8FF,stroke:#9333EA,stroke-width:2px,color:#6B21A8
+    style E fill:#DCFCE7,stroke:#16A34A,stroke-width:2px,color:#15803D
+    style F fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#B91C1C
+
+```
+
+---
+<br>
+
 ## ✅ Resultados Esperados
 
 Al finalizar el procesamiento de datos, el proyecto entregará las siguientes capacidades:
@@ -195,6 +194,8 @@ Al finalizar el procesamiento de datos, el proyecto entregará las siguientes ca
   * *"Priorizar stock de Laptops en Sucursal Norte (Margen detectado: 40%)"*.
   * *"Auditar costos operativos en Sucursal Oeste (Ratio de gasto excedido en 60%)"*.
 * [x] **Portafolio Abierto:** Repositorio estructurado con queries SQL limpias, cuadernos de Python optimizados y la arquitectura del reporte.
+
+* *(ejemplos ilustrativos, se reemplazan con hallazgo real)*
 
 ---
 
