@@ -7,35 +7,40 @@ USE ventas_costos;
 -- y 3 (Tendencias Estacionales) del doc de definición del proyecto.
 -- ============================================================
 
-
 -- ============================================================
 -- 1. CUADRANTE VOLUMEN VS. MARGEN % (candidatos a impulsar o renegociar)
 -- ============================================================
-
+WITH volumen_producto AS (
+    SELECT
+        p.nombre_producto,
+        SUM(v.cantidad_vendida) AS volumen,
+        ROUND((p.precio_venta - p.costo_unitario) / p.precio_venta * 100, 1) AS margen_pct
+    FROM ventas_periodo_analisis v
+    JOIN productos p ON v.id_producto = p.id_producto
+    GROUP BY p.nombre_producto, p.precio_venta, p.costo_unitario
+),
+promedios AS (
+    SELECT
+        AVG(volumen) AS volumen_promedio,
+        AVG(margen_pct) AS margen_pct_promedio
+    FROM volumen_producto
+)
 SELECT
-    p.nombre_producto,
-    SUM(v.cantidad_vendida) AS volumen,
-    ROUND((p.precio_venta - p.costo_unitario) / p.precio_venta * 100, 1) AS margen_pct,
+    vp.nombre_producto,
+    vp.volumen,
+    vp.margen_pct,
     CASE
-        WHEN SUM(v.cantidad_vendida) >= (SELECT AVG(cant) FROM (
-                SELECT id_producto, SUM(cantidad_vendida) AS cant
-                FROM ventas_periodo_analisis GROUP BY id_producto) t)
-             AND (p.precio_venta - p.costo_unitario) / p.precio_venta * 100 
-                (SELECT AVG(margen_unitario_pct) FROM (
-                    SELECT (precio_venta - costo_unitario)/precio_venta*100 AS margen_unitario_pct
-                    FROM productos) m)
+        WHEN vp.volumen >= pr.volumen_promedio AND vp.margen_pct < pr.margen_pct_promedio
         THEN 'Alto volumen / bajo margen % -> revisar costo o precio'
         ELSE 'Otro cuadrante'
     END AS diagnostico
-FROM ventas_periodo_analisis v
-JOIN productos p ON v.id_producto = p.id_producto
-GROUP BY p.nombre_producto, p.precio_venta, p.costo_unitario
-ORDER BY volumen DESC;
+FROM volumen_producto vp
+CROSS JOIN promedios pr
+ORDER BY vp.volumen DESC;
 -- Resultado real: Laptop es el producto de MAYOR volumen (957 unidades) y el de
 -- MENOR margen % (33.3%) de todo el catálogo -> candidato directo a revisar costo
 -- de adquisición o evaluar un ligero ajuste de precio, ya que su alto volumen
 -- amplifica el impacto de cualquier punto porcentual de margen que se gane o pierda.
-
 
 -- ============================================================
 -- 2. TOP Y BOTTOM PRODUCTOS POR MARGEN TOTAL GENERADO
