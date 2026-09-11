@@ -7,6 +7,7 @@ USE ventas_costos;
 -- y 3 (Tendencias Estacionales) del doc de definición del proyecto.
 -- ============================================================
 
+
 -- ============================================================
 -- 1. CUADRANTE VOLUMEN VS. MARGEN % (candidatos a impulsar o renegociar)
 -- ============================================================
@@ -41,6 +42,7 @@ ORDER BY vp.volumen DESC;
 -- MENOR margen % (33.3%) de todo el catálogo -> candidato directo a revisar costo
 -- de adquisición o evaluar un ligero ajuste de precio, ya que su alto volumen
 -- amplifica el impacto de cualquier punto porcentual de margen que se gane o pierda.
+
 
 -- ============================================================
 -- 2. TOP Y BOTTOM PRODUCTOS POR MARGEN TOTAL GENERADO
